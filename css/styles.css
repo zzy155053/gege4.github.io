@@ -1,0 +1,1824 @@
+/*
+ * ========================================
+ * Forward Fitness Club - Main Stylesheet
+ * ========================================
+ * 
+ * Author: Gege
+ * Date: October 2025
+ * Purpose: Global stylesheet for Forward Fitness Club website
+ *          Includes responsive design, layout components, and interactive elements
+ * 
+ * File Structure:
+ * 1. CSS Reset & Base Styles
+ * 2. Structural Elements (Header, Navigation, Main, Footer)
+ * 3. Typography & Content Styles
+ * 4. Interactive Elements (Images, Links, Hover Effects)
+ * 5. Utility Classes
+ * 6. About Page Specific Styles
+ * 7. Responsive Design (Mobile-first approach)
+ * 8. Highlight System for About Page
+ * 
+ * Color Palette:
+ * Primary: #333 (Dark Gray)
+ * Secondary: #6c757d (Medium Gray)
+ * Background: #fff (White)
+ * Light Background: #f8f9fa (Light Gray)
+ * Accent: #f0f0f0 (Very Light Gray)
+ * 
+ * ========================================
+ * CSS RESET & BASE STYLES
+ * ========================================
+ */
+
+/* CSS Reset: Clear browser default styles and establish unified baseline */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Ensure HTML5 semantic elements start with a clean baseline */
+section, article, aside {
+    margin: 0;
+    padding: 0;
+}
+
+/* Reset list element default styles */
+ul, ol {
+    list-style: none; /* Remove default bullets/numbers from unordered and ordered lists */
+}
+
+/* Reset link element default styles */
+a {
+    text-decoration: none; /* Remove default link underlines (can be customized later as needed) */
+    color: inherit; /* Let link color inherit from parent element, avoid default blue */
+}
+
+/* Reset image element default styles */
+img, ul {
+    border: none; /* Remove default image borders in some browsers (e.g., when wrapped in links) */
+    max-width: 100%; /* Ensure images adapt to parent container width, prevent overflow (responsive design) */
+    height: auto; /* Maintain image aspect ratio, prevent stretching distortion */
+}
+
+/* Add figure & figcaption to reset for consistent default styling */
+figure, figcaption {
+    margin: 0;
+    padding: 0;
+}
+
+/* Reset table element default borders */
+table {
+    border-collapse: collapse; /* Merge table borders, avoid double borders */
+    border-spacing: 0; /* Clear default spacing between table cells */
+}
+
+/* Reset form element default styles */
+button, input, select, textarea {
+    font-family: inherit; /* Let form elements inherit page global font */
+    font-size: inherit; /* Let form elements inherit page base font size */
+    border: none; /* Clear form element default borders (can be customized later) */
+    background: transparent; /* Clear form element default background color */
+}
+
+/*
+ * Body Element - Base typography and layout foundation
+ * Sets the foundation for all text and background styling
+ */
+body {
+    font-family: 'Roboto Slab', Arial, sans-serif;  /* Google Font for main content */
+    line-height: 1.6;               /* Improved readability with 1.6 line height */
+    color: #333;                    /* Primary text color (dark gray) */
+    background-color: #000;         /* Black background for page sides */
+    padding: 0 20px;                /* Added horizontal padding to prevent content from touching edges */
+}
+
+/* ========================================
+   STRUCTURAL ELEMENTS
+   ======================================== */
+
+/*
+ * Header Container - Main site header with logo and navigation
+ * Uses Flexbox for horizontal layout with proper spacing
+ */
+header {
+    display: flex;                   /* Flexbox layout for horizontal alignment */
+    justify-content: flex-start;     /* Align content to the left */
+    align-items: center;             /* Vertically center all header elements */
+    padding: 6px 20px;               /* Further reduce vertical padding to move border up */
+    gap: 60px;                       /* Space between logo and navigation */
+    background-color: #000;          /* Switch header background to black */
+    border-bottom: 2px solid #333;    /* Strong bottom border for definition */
+    position: relative;              /* Enable absolute centering of nav */
+}
+
+/*
+ * Header Logo - Company logo styling
+ * Fixed dimensions ensure consistent branding
+ */
+header img {
+    height: 220px;                   /* Fixed height for logo */
+    width: 297px;                    /* Fixed width for logo */
+}
+
+/*
+ * Hamburger Menu Toggle Button - Mobile navigation control
+ * Hidden by default on desktop, shown on mobile
+ */
+.menu-toggle {
+    display: none;                    /* Hidden on desktop */
+    flex-direction: column;           /* Stack the lines vertically */
+    justify-content: space-around;    /* Distribute space between lines */
+    width: 30px;                     /* Button width */
+    height: 30px;                    /* Button height */
+    background: transparent;          /* Transparent background */
+    border: none;                    /* No border */
+    cursor: pointer;                 /* Pointer cursor on hover */
+    padding: 0;                      /* No padding */
+    position: absolute;              /* Absolute positioning */
+    right: 20px;                     /* 20px from right */
+    top: 50%;                        /* Center vertically */
+    transform: translateY(-50%);     /* Perfect vertical centering */
+    z-index: 1000;                  /* Above other elements */
+}
+
+/*
+ * Hamburger Icon - Three horizontal lines
+ */
+.hamburger {
+    display: block;                  /* Block display for lines */
+    width: 25px;                     /* Line width */
+    height: 3px;                     /* Line height */
+    background-color: #fff;          /* White lines */
+    transition: all 0.3s ease;       /* Smooth transitions */
+    position: relative;              /* Relative positioning */
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';                     /* Create pseudo-elements */
+    position: absolute;              /* Absolute positioning */
+    width: 25px;                     /* Same width as main line */
+    height: 3px;                     /* Same height as main line */
+    background-color: #fff;          /* White lines */
+    transition: all 0.3s ease;       /* Smooth transitions */
+}
+
+.hamburger::before {
+    top: -8px;                       /* Position before the main line */
+}
+
+.hamburger::after {
+    bottom: -8px;                    /* Position after the main line */
+}
+
+/*
+ * Hamburger Active State - Transform to X icon
+ */
+.menu-toggle.active .hamburger {
+    background-color: transparent;    /* Hide middle line */
+}
+
+.menu-toggle.active .hamburger::before {
+    top: 0;                          /* Move to center */
+    transform: rotate(45deg);         /* Rotate 45 degrees */
+}
+
+.menu-toggle.active .hamburger::after {
+    bottom: 0;                       /* Move to center */
+    transform: rotate(-45deg);        /* Rotate -45 degrees */
+}
+
+/* Media Query for Tablet Viewport */
+@media screen and (min-width: 630px) {
+    /* Remove mobile header positioning for tablet */
+    header {
+        position: static;
+    }
+
+    /* Display new grid horizontally in three columns */
+    .grid {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 20px;
+    }
+
+    /* Adjust figcaption size and padding for tablet */
+    .pic-text {
+        font-size: 1em;
+        padding: 10px;
+    }
+
+    /* Show tablet/desktop content, hide mobile content */
+    .mobile {
+        display: none;
+    }
+    .tablet-desktop {
+        display: block;
+    }
+
+    /* Tablet Viewport: Style rules for table */
+    .tablet-desktop table {
+        border: 1px solid #000;
+        border-collapse: collapse;
+        margin: 0 auto;
+        width: 100%;
+        background-color: #fff; /* white background so black text in cells is readable */
+    }
+
+    .tablet-desktop caption {
+        font-size: 1.5em;
+        font-weight: bold;
+        padding: 1%;
+        color: #000;
+        background: #fff;
+    }
+
+    .tablet-desktop th,
+    .tablet-desktop td {
+        border: 1px solid #000;
+        padding: 2%;
+        color: #000;
+        background: #fff;
+        text-align: left;
+    }
+
+    .tablet-desktop th {
+        background-color: #000;
+        color: #fff;
+        font-size: 1.15em;
+    }
+
+    .tablet-desktop tr:nth-child(odd) {
+        background-color: #ccc;
+    }
+}
+
+/* Media Query for Large Desktop Viewports */
+@media screen and (min-width: 1921px) {
+    /* Restrict table width to 80% on very large screens */
+    .tablet-desktop table {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+/*
+ * Navigation Container - Main site navigation
+ * Desktop: flex layout for horizontal arrangement
+ */
+nav {
+    padding: 1%;
+    margin-bottom: 1%;
+    display: flex;                   /* Flex layout for horizontal arrangement */
+    align-items: center;             /* Vertically center nav items */
+    gap: 0;                           /* No gap, using margins for spacing */
+}
+
+/*
+ * Navigation List - Style for unordered list in navigation
+ * Mobile-first: centers text alignment
+ */
+nav ul {
+    text-align: center;
+}
+
+/*
+ * Navigation List Items - Style for list items in navigation
+ * Mobile-specific styling
+ */
+nav li {
+    font-size: 1.5em;
+    font-family: 'Francois One', sans-serif;
+    border-top: 1px solid #fff;
+}
+
+nav li:first-child {
+    border-top: none;
+}
+
+/*
+ * Navigation Links - Styling for both active and inactive nav items
+ * Includes hover effects with smooth transitions
+ */
+nav a, nav b {
+    font-family: 'Francois One', Verdana, Arial, sans-serif; /* Google Font for navigation */
+    font-size: 22px;                 /* Slightly larger font for navigation */
+    font-weight: bold;               /* Bold text for emphasis */
+    display: inline-block;           /* Inline-block for horizontal arrangement */
+    padding: 0;                      /* No padding for clean appearance */
+    margin: 0 15px;                  /* Add horizontal spacing between navigation items */
+    line-height: 1;                  /* Tight line height for navigation */
+    text-decoration: none;          /* Remove default underlines */
+    color: #333;                     /* Modified text color - dark gray instead of white */
+    /* Smooth transitions for hover effects */
+    transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+/*
+ * Navigation Hover Effect - Interactive feedback for nav links
+ * Provides visual feedback when user hovers over navigation items
+ */
+nav a:hover {
+    color: #bbbbbb;                 /* Lighter gray hover on black background */
+    transform: translateY(-2px);    /* Subtle upward movement */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+/*
+ * Active Navigation Item - Current page indicator
+ * Bold text without hover effects to show current page
+ */
+nav b {
+    color: #fff;                    /* Maintain white for active state on black */
+}
+
+/*
+ * Hero Section - Static banner image directly under header
+ * Ensures the top edge of the image aligns exactly with the header bottom border
+ */
+.hero {
+    width: 100%;
+    max-width: 1200px;              /* Match main container width */
+    margin: 0 auto;                  /* Center to align with main */
+    height: auto;                   /* Allow image to dictate height */
+    min-height: unset;              /* Remove forced minimum */
+    max-height: none;               /* Allow natural aspect ratio */
+    overflow: visible;              /* Prevent clipping */
+    margin-top: 0;                  /* Flush with header bottom border */
+}
+
+.hero-img {
+    display: block;                  /* Remove inline spacing */
+    width: 100%;                     /* Full-width banner */
+    height: auto;                    /* Maintain natural aspect ratio */
+    object-fit: contain;             /* Show entire image within container */
+    object-position: center;         /* Center focal point */
+    margin: 0;                       /* No gap above/below; aligns with header border */
+    transform: translateY(0);        /* Align top edge with header border */
+    transition: none;                /* Static: no animation */
+    cursor: default;                 /* Not interactive */
+}
+
+.hero-img:hover {
+    transform: none;                 /* No hover transform */
+    box-shadow: none;                /* No hover shadow */
+}
+
+@media (max-width: 768px) {
+    .hero {
+        height: 40vh;               /* Smaller fixed height on mobile */
+        min-height: 240px;          /* Maintain readability */
+        max-height: 420px;
+    }
+}
+
+/*
+ * Main Content Area - Primary content container
+ * Centered layout with maximum width for optimal reading experience
+ */
+main {
+    background-color: #000;          /* Black background below hero on all pages */
+    padding: 0 2% 2% 2%;            /* Remove top padding to eliminate gap */
+    font-size: 1.15em;               /* Font size 1.15em */
+    max-width: 1200px;               /* Maximum width for desktop readability */
+    margin: 0 auto;                  /* Center the main content horizontally */
+    font-family: 'Roboto Slab', serif;
+    color: #fff;                     /* Default text color to white */
+}
+
+.main-dark,
+main h1, 
+main h2,
+main h3,
+main h4,
+main p,
+main li {
+    color: #fff;                     /* Ensure headings and list text appear white */
+}
+
+/* Links inside main on dark background */
+main a {
+    color: #dddddd;
+    text-decoration: none;
+}
+
+main a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.tel-link {
+    background-color: #404040;
+    padding: 2%;
+    margin: 0 auto;
+    width: 80%;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.tel-link a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5em;
+    display: block;
+}
+
+.hours {
+    margin-left: 10%;
+}
+
+/*
+ * ID Selectors for About Page Layout
+ * These selectors target specific div elements with ID attributes
+ * to create a custom layout for the about page content
+ */
+
+/*
+ * Weights, Cardio, Training - Combined layout for mobile viewport
+ */
+#weights, #cardio, #training {
+    margin: 0 2%;
+}
+
+/*
+ * Footer Container - Site footer with contact information
+ * Dark background with white text for visual contrast
+ */
+footer {
+    background-color: #333;          /* Dark background for footer */
+    color: #fff;                     /* White text for contrast */
+    text-align: center;              /* Center-aligned footer content */
+    padding: 20px;                   /* Consistent padding */
+    margin-top: 0;                   /* No gap between main and footer */
+}
+
+/*
+ * Footer Paragraphs - Spacing for footer text
+ */
+footer p {
+    font-size: 0.75em;              /* Font size 0.75em */
+    text-align: center;             /* Center text alignment */
+    color: #fff;                     /* White text color */
+    padding: 0 1em;                 /* Horizontal padding */
+    margin-bottom: 10px;             /* Space between footer paragraphs */
+}
+
+/*
+ * Footer Links - White links in footer
+ */
+footer a {
+    color: #fff;                     /* White links for footer */
+}
+
+/*
+ * About Page - Ensure left alignment for all content
+ * Only applies to about page by targeting specific class
+ */
+.about-page main {
+    text-align: left;                /* Left-align all content in main */
+}
+
+/*
+ * Contact Page - Center content and Times New Roman font
+ * Only applies to contact page by targeting specific class
+ */
+.contact-page main {
+    text-align: center;              /* Center all content in main */
+}
+
+.contact-page main h2 {
+    font-family: "Times New Roman", Times, serif;  /* Times New Roman font */
+    margin-bottom: 20px;             /* Space below heading */
+}
+
+.contact-page main p {
+    margin-bottom: 10px;             /* Space between paragraphs */
+}
+
+.contact-page iframe {
+    margin-top: 20px;                /* Space above map */
+}
+
+/*
+ * Phone Button - Style for phone number button on contact page
+ */
+.phone-button {
+    display: inline-block;            /* Block display for proper sizing */
+    background-color: #404040;        /* Dark gray background */
+    color: #fff;                      /* White text */
+    padding: 15px 30px;               /* Padding for button size */
+    font-size: 1.5em;                 /* Large font size */
+    text-decoration: none;             /* Remove underline */
+    border: none;                     /* No border */
+    border-radius: 0;                 /* Square corners */
+    margin: 20px 0;                   /* Vertical spacing */
+    cursor: pointer;                  /* Pointer cursor */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.phone-button:hover {
+    background-color: #555;           /* Lighter gray on hover */
+}
+
+/*
+ * Generic Button - For submit and action buttons (e.g., contact form submit)
+ */
+.btn,
+input[type="submit"].btn {
+    display: inline-block;
+    background-color: #ff6b35;        /* Bright orange for high contrast */
+    color: #fff;                      /* White text for readability */
+    padding: 12px 24px;               /* Comfortable click target */
+    font-weight: 700;                 /* Bold label */
+    letter-spacing: 0.5px;            /* Slight spacing for legibility */
+    border: 2px solid transparent;    /* Enable focus outline swap */
+    border-radius: 6px;               /* Subtle rounding */
+    cursor: pointer;                  /* Pointer cursor */
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    margin-top: 12px;                 /* Space from previous fields */
+}
+
+.btn:hover,
+input[type="submit"].btn:hover {
+    background-color: #e55a2b;        /* Darker on hover */
+    transform: translateY(-1px);      /* Small lift */
+    box-shadow: 0 6px 16px rgba(229, 90, 43, 0.35);
+}
+
+.btn:focus-visible,
+input[type="submit"].btn:focus-visible {
+    outline: none;
+    border-color: #ffffff;            /* High-contrast focus ring */
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4);
+}
+
+/*
+ * Contact Email Link - Style for email links on contact page
+ */
+.contact-email-link {
+    color: #666600;                   /* Dark olive green color */
+    text-decoration: none;            /* Remove underline */
+}
+
+/*
+ * Footer Link Hover - Gray hover effect for footer links
+ */
+footer a:hover {
+    color: #6c757d;                  /* Medium gray on hover */
+}
+
+/* ========================================
+   CONTACT FORM LAYOUT
+   ======================================== */
+.form-grid fieldset {
+    display: grid;
+    grid-template-columns: 1fr;         /* stack each field vertically */
+    column-gap: 16px;
+    row-gap: 16px;
+    align-items: start;
+    border: 1px solid #666;             /* keep visible on dark bg */
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.form-grid legend {
+    color: #fff;
+    padding: 0 8px;
+    font-weight: 700;
+}
+
+.form-grid label {
+    color: #fff;
+    text-align: left;
+    display: block;                      /* place label above the control */
+    margin-bottom: 6px;
+}
+
+.form-grid fieldset p {
+    grid-column: 1 / -1;                 /* paragraph spans entire fieldset width */
+    color: #fff;
+    margin: 0;
+    text-align: left;
+}
+
+.form-grid .checkbox-group {
+    grid-column: 1 / -1;
+    display: grid;                        /* keep neat grid for options */
+    grid-template-columns: 1fr;           /* single column list */
+    column-gap: 24px;
+    row-gap: 12px;
+    align-items: start;
+}
+
+.form-grid .checkbox-group label {
+    text-align: left;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ========================================
+   MOBILE (SMALL SCREENS) ADAPTATION
+   ======================================== */
+@media (max-width: 640px) {
+    .form-grid fieldset {
+        grid-template-columns: 1fr;      /* stack into one column */
+        row-gap: 12px;
+        padding: 12px;
+    }
+
+    .form-grid label {
+        text-align: left;
+    }
+
+    .form-grid fieldset p {
+        grid-column: 1 / -1;
+        text-align: left;
+        margin-bottom: 4px;
+    }
+
+    .form-grid select,
+    .form-grid textarea {
+        grid-column: 1 / -1;             /* full width */
+    }
+
+    .form-grid .checkbox-group {
+        grid-column: 1 / -1;
+        grid-template-columns: 1fr;       /* single column list for readability */
+        row-gap: 12px;
+    }
+
+    .form-grid input[type="text"],
+    .form-grid input[type="email"],
+    .form-grid input[type="tel"],
+    .form-grid select,
+    .form-grid textarea {
+        font-size: 16px;                   /* prevent iOS zoom; improve tapability */
+    }
+
+    .form-grid .checkbox-group label {
+        font-size: 16px;
+    }
+}
+
+.form-grid input[type="text"],
+.form-grid input[type="email"],
+.form-grid input[type="tel"],
+.form-grid select,
+.form-grid textarea {
+    background: #000;
+    color: #fff;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    padding: 10px 12px;
+    width: 100%;
+}
+
+.form-grid select,
+.form-grid textarea {
+    grid-column: 1 / -1;                 /* full width inside fieldset */
+}
+
+/* ========================================
+   DESKTOP VIEWPORT: FORM GRID (3 COLUMNS)
+   ======================================== */
+@media screen and (min-width: 1024px) {
+    /* Desktop Viewport: Style rules for form elements */
+    form {
+        width: auto;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: auto auto auto;  /* three columns per textbook */
+        grid-gap: 20px;                          /* 20px gap between columns/rows */
+    }
+
+    .btn {
+        grid-column: 1 / span 3;                 /* center button across all columns */
+        justify-self: center;
+    }
+}
+
+/* ========================================
+   TYPOGRAPHY & CONTENT STYLES
+   ======================================== */
+
+/*
+ * Heading Styles - Consistent typography hierarchy
+ * Establishes clear visual hierarchy for content
+ */
+h1, h2 {
+    margin-bottom: 20px;             /* Consistent bottom margin */
+    color: #333;                     /* Dark gray for headings */
+}
+
+/*
+ * Primary Heading - Main page titles
+ */
+h1 {
+    font-size: 2.5em;                /* Large font size for main headings */
+}
+
+/*
+ * Secondary Heading - Section titles
+ */
+h2 {
+    font-size: 2em;                  /* Medium font size for subheadings */
+}
+
+/*
+ * Paragraph Styles - Body text formatting
+ * Optimized for readability and consistent spacing
+ */
+p {
+    margin-bottom: 15px;             /* Space between paragraphs */
+    font-size: 16px;                 /* Standard readable font size */
+}
+
+/*
+ * List Styles - Unordered lists formatting
+ */
+ul {
+    margin-bottom: 20px;             /* Space below lists */
+    padding-left: 20px;              /* Indentation for list items */
+}
+
+/*
+ * List Items - Individual list item spacing
+ */
+li {
+    margin-bottom: 5px;              /* Space between list items */
+}
+
+/*
+ * Definition List Styles - For structured information display
+ */
+dl {
+    margin-bottom: 20px;             /* Space below definition lists */
+}
+
+/*
+ * Definition Terms - Bold formatting for terms
+ */
+dt {
+    font-weight: bold;               /* Bold text for definition terms */
+    margin-top: 15px;                /* Space above terms */
+    margin-bottom: 5px;              /* Space below terms */
+}
+
+/*
+ * Definition Descriptions - Indented descriptions
+ */
+dd {
+    margin-bottom: 10px;             /* Space below descriptions */
+    margin-left: 20px;               /* Indentation for descriptions */
+}
+
+/* ========================================
+   INTERACTIVE ELEMENTS
+   ======================================== */
+
+/*
+ * Image Styles - Responsive images with hover effects
+ * Ensures images scale properly and provide interactive feedback
+ */
+img {
+    max-width: 100%;                 /* Responsive width constraint */
+    height: auto;                    /* Maintain aspect ratio */
+    display: block;                  /* Block display for proper spacing */
+    margin: 20px 0;                  /* Vertical margins for spacing */
+    /* Smooth transitions for hover effects */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;                 /* Indicate interactive element */
+}
+
+/*
+ * Image Hover Effect - Interactive image enhancement
+ * Provides visual feedback and draws attention to images
+ */
+img:hover {
+    transform: scale(1.05);          /* Subtle scale increase */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Soft shadow for depth */
+}
+
+/* Text shadow for h3 elements within mobile section */
+.mobile h3 {
+    text-shadow: 5px 5px 8px #ccc;
+}
+
+/* Desktop layout: place multiple figures side-by-side */
+@media (min-width: 1024px) {
+    .grid {
+        display: flex;                /* use flexbox for reliable row layout */
+        flex-wrap: wrap;              /* allow wrapping if viewport is tight */
+        gap: 20px;                    /* consistent spacing between cards */
+        align-items: stretch;         /* equal height columns when possible */
+    }
+
+    .frame {
+        display: block;
+        opacity: 0.9;                 /* Desktop: slight transparency by default */
+        flex: 1 1 calc(33.333% - 20px); /* three per row accounting for gap */
+        margin: 0;                    /* spacing handled by grid gap */
+        vertical-align: top;          /* safe default for legacy */
+        position: relative;           /* enable caption overlay */
+    }
+
+    .frame img {
+        width: 100%;
+        height: auto;
+        margin: 0;                    /* caption overlays image, no gap needed */
+    }
+
+    /* Desktop: enlarge and pad figcaptions */
+    .pic-text {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        font-size: 1.5em;
+        padding: 20px;
+        text-align: center;
+        font-weight: bold;
+        box-sizing: border-box;
+    }
+
+    /* Desktop: full opacity and shadow on hover */
+    .frame:hover {
+        opacity: 1;
+        box-shadow: 8px 8px 10px #808080;
+    }
+}
+
+/*
+ * Link Styles - General link formatting
+ * Consistent styling for all links throughout the site
+ */
+a {
+    color: #6c757d;                  /* Medium gray for links */
+    text-decoration: none;           /* Remove default underlines */
+}
+
+/*
+ * Link Hover Effect - Interactive link feedback
+ * Provides clear visual feedback for clickable elements
+ */
+a:hover {
+    text-decoration: underline;      /* Show underline on hover */
+    color: #333;                     /* Darker color on hover */
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+/*
+ * Container Class - Centered content wrapper
+ * Provides consistent maximum width and centering for content
+ */
+.container {
+    max-width: 1200px;               /* Maximum content width */
+    margin: 0 auto;                  /* Center the container */
+    padding: 0 20px;                 /* Horizontal padding */
+}
+
+/*
+ * Text Center - Center-aligned text utility
+ */
+.text-center {
+    text-align: center;              /* Center text alignment */
+}
+
+/*
+ * Center Image - Horizontally center specific images
+ */
+.center-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*
+ * Margin Bottom 20px - Spacing utility
+ */
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+/*
+ * Margin Top 20px - Spacing utility
+ */
+.mt-20 {
+    margin-top: 20px;
+}
+
+/* ========================================
+   ABOUT PAGE SPECIFIC STYLES
+   ======================================== */
+
+/*
+ * Flex Container - Three-column layout for About page
+ * Uses CSS Flexbox for responsive three-column layout
+ * Complex Layout Explanation:
+ * - display: flex creates a flexible container
+ * - gap: 20px provides consistent spacing between columns
+ * - align-items: flex-start ensures columns align at the top
+ * - This creates equal-width columns that adapt to content
+ */
+.flex-container {
+    display: flex;                   /* Enable flexbox layout */
+    gap: 20px;                       /* Space between flex items */
+    align-items: flex-start;         /* Align items to the top */
+    justify-content: space-between;  /* Distribute items evenly */
+    text-align: left;                /* Ensure left alignment for all content */
+}
+
+/*
+ * Flex Item - Individual column styling
+ * Each column in the three-column layout
+ * Complex Layout Explanation:
+ * - flex: 1 makes each item take equal space
+ * - padding: 15px provides internal spacing
+ * - border-radius: 8px creates rounded corners
+ * - This creates visually appealing card-like columns
+ */
+.flex-item {
+    flex: 1;                         /* Equal width distribution */
+    padding: 15px;                   /* Internal spacing */
+    border-radius: 8px;              /* Rounded corners */
+    text-align: left;                /* Ensure left alignment */
+    align-self: flex-start;          /* Align to start of cross axis */
+}
+
+/*
+ * Flex Item Headings - Styling for column titles
+ */
+.flex-item h1 {
+    font-size: 2em;                  /* Large font for column titles */
+    font-weight: bold;               /* Bold text for emphasis */
+    margin: 0 0 10px 0;              /* Bottom margin only */
+    white-space: nowrap;             /* Prevent text wrapping */
+    overflow: hidden;                 /* Hide overflow if needed */
+    text-overflow: ellipsis;         /* Add ellipsis if text is too long */
+}
+
+/*
+ * Flex Item H2 - Styling to keep text on one line
+ */
+.flex-item h2 {
+    white-space: nowrap;             /* Keep "Personal Training" on one line */
+}
+
+/*
+ * Flex Item Images - Styling for column images
+ */
+.flex-item img {
+    display: block;                  /* Block display for proper spacing */
+    margin: 0 0 10px 0;              /* Override global img margin, only bottom margin */
+    margin-left: 0;                  /* Ensure left alignment */
+    margin-right: auto;              /* Center horizontally if needed */
+}
+
+/* About page: force three feature images to same size and alignment */
+.about-page .flex-container section img {
+    width: 100%;                     /* fill column width */
+    height: 260px;                   /* unified height for all three */
+    object-fit: cover;               /* crop uniformly to avoid distortion */
+    object-position: center;         /* center focal point to avoid odd cropping on left */
+    border-radius: 8px;              /* consistent rounding */
+    margin: 0 0 10px 0;              /* consistent spacing below */
+}
+
+/* Ensure three columns behave as equal flex items on About page */
+.about-page .flex-container > section {
+    flex: 1;                         /* equal width columns */
+    overflow: hidden;                /* clip any internal overflow */
+}
+
+/* Disable global image hover effects for About page feature images */
+.about-page .flex-container section img:hover {
+    transform: none;                 /* no scale to prevent layout shift */
+    box-shadow: none;                /* keep clean edges */
+    cursor: default;                 /* not interactive */
+}
+
+/*
+ * Round Images - Rounded corners for images
+ */
+.round {
+    border-radius: 8px;
+}
+
+/*
+ * Flex Item Paragraphs - Styling for column text
+ */
+.flex-item p {
+    margin: 0 0 5px 0;               /* Consistent paragraph spacing */
+}
+
+/*
+ * Flex Item Last Paragraph - Special spacing for last paragraph
+ */
+.flex-item p:last-of-type {
+    margin: 0 0 10px 0;              /* Extra space for last paragraph */
+}
+
+/*
+ * Flex Item Lists - Styling for column lists
+ */
+.flex-item ul {
+    margin: 0;                       /* Remove default margins */
+    padding-left: 20px;              /* Standard list indentation */
+    text-align: left;                /* Ensure left alignment */
+}
+
+.flex-item li {
+    margin-bottom: 5px;              /* Space between list items */
+    text-align: left;                /* Ensure left alignment */
+}
+
+/*
+ * Exercise Section - Special content area for equipment information
+ * Complex Layout Explanation:
+ * - background-color: #f0f0f0 creates visual separation
+ * - padding: 20px provides internal spacing
+ * - margin: 20px 0 creates external spacing
+ * - border-top/bottom: 2px solid #333 creates strong visual boundaries
+ * - This creates a distinct content block for equipment information
+ */
+.exercise-section {
+    background: linear-gradient(to bottom, #d0d0d0, #fff);  /* Gradient from dark gray to white */
+    padding: 20px;                   /* Internal spacing */
+    margin: 20px 0;                  /* External spacing */
+    border-top: 2px solid #333;       /* Top border for definition */
+    border-bottom: 2px solid #333;    /* Bottom border for definition */
+    max-width: 100%;                 /* Full width constraint */
+}
+
+/*
+ * Exercise Section Headings - Styling for section titles
+ */
+.exercise-section h1 {
+    font-size: 2em;                  /* Large font for section titles */
+    font-weight: bold;               /* Bold text for emphasis */
+    margin: 0 0 15px 0;              /* Bottom margin only */
+}
+
+/*
+ * Exercise Section Paragraphs - Styling for section content
+ */
+.exercise-section p {
+    margin: 0 0 15px 0;              /* Consistent paragraph spacing */
+}
+
+/*
+ * Exercise Section Last Paragraph - Special spacing for last paragraph
+ */
+.exercise-section p:last-child {
+    margin: 15px 0 0 0;              /* Top margin for last paragraph */
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - MOBILE-FIRST APPROACH
+   ======================================== */
+
+/*
+ * Mobile Responsive Design - Breakpoint at 768px
+ * Complex Responsive Logic Explanation:
+ * - @media (max-width: 768px) targets devices with screen width ≤ 768px
+ * - This includes tablets in portrait mode and mobile phones
+ * - The layout transforms from horizontal to vertical stacking
+ * - Font sizes are reduced for better mobile readability
+ * - Padding and margins are adjusted for smaller screens
+ * - Flexbox properties are modified for mobile layout
+ */
+@media (max-width: 768px) {
+    /*
+     * Header Mobile Layout - Vertical stacking for mobile
+     * Complex Layout Change:
+     * - flex-direction: column changes from horizontal to vertical layout
+     * - gap: 20px reduces spacing for mobile screens
+     * - text-align: center centers content for mobile
+     */
+    header {
+        flex-direction: column;       /* Stack elements vertically */
+        gap: 20px;                   /* Reduce spacing for mobile */
+        text-align: center;          /* Center content for mobile */
+        background-color: #000;      /* Pure black background */
+        padding: 20px;               /* Compact padding for mobile */
+        position: relative;          /* Relative positioning for hamburger menu */
+    }
+    
+    /*
+     * Hamburger Menu Toggle Mobile - Show hamburger button
+     */
+    .menu-toggle {
+        display: flex;                /* Show button on mobile */
+    }
+    
+    /*
+     * Main Navigation Mobile - Hidden by default
+     */
+    .main-nav {
+        display: none;                /* Hidden by default on mobile */
+        width: 100%;                  /* Full width */
+    }
+    
+    /*
+     * Main Navigation Mobile Active - Show when hamburger is clicked
+     */
+    .main-nav.active {
+        display: flex;                /* Show navigation when active */
+        flex-direction: column;        /* Vertical stack */
+    }
+    
+    /*
+     * Header Logo Mobile - Center and scale logo
+     */
+    header img {
+        margin: 0 auto;               /* Center the logo */
+        display: block;              /* Block display for centering */
+    }
+    
+    /*
+     * Navigation Mobile Layout - Vertical button navigation
+     * Complex Layout Change:
+     * - flex-direction: column creates vertical stack
+     * - display: flex ensures proper alignment
+     * - Dark button styling for each nav item
+     */
+    nav {
+        display: flex;                /* Flex container */
+        flex-direction: column;       /* Vertical stack */
+        width: 100%;                  /* Full width */
+        gap: 8px;                     /* Small gap between items */
+        padding: 20px 0;             /* Vertical padding */
+    }
+    
+    /*
+     * Navigation Links Mobile - Button-like styling
+     */
+    nav a, nav b {
+        background-color: #000;      /* Black background */
+        color: #fff;                 /* White text */
+        text-transform: uppercase;   /* Uppercase text */
+        font-family: 'Francois One', Verdana, Arial, sans-serif;
+        font-size: 20px;             /* Large font size */
+        font-weight: bold;           /* Bold weight */
+        padding: 15px 20px;          /* Button padding */
+        display: block;              /* Block display */
+        text-align: center;          /* Center text */
+        border-radius: 0;            /* No border radius */
+        transition: background-color 0.3s ease;
+    }
+    
+    /*
+     * Navigation Hover Mobile - Lighter background on hover
+     */
+    nav a:hover {
+        background-color: #333;     /* Dark gray on hover */
+        transform: none;             /* No transform on mobile */
+    }
+    
+    /*
+     * Body Mobile - Different backgrounds for different page types
+     */
+    body {
+        background-color: #000;     /* Pure black background for nav page */
+        color: #fff;                 /* White text */
+    }
+    
+    /*
+     * Body Mobile - Black background for content pages
+     */
+    body:not(.nav-page) {
+        background-color: #000;
+        color: #fff;
+    }
+    
+    /*
+     * Hero Image Mobile - Hidden on navigation page
+     */
+    .hero {
+        display: none;               /* Hide hero image */
+    }
+    
+    /*
+     * Hero Image Mobile - Show and adjust for content pages
+     */
+    body:not(.nav-page) .hero {
+        display: block;
+        height: 40vh;
+        min-height: 240px;
+        max-height: 420px;
+    }
+    
+    /*
+     * Main Content Mobile - Show for content pages with mobile-first styles
+     */
+    body:not(.nav-page) main {
+        display: block;
+        background-color: #000;
+        color: #fff;
+        padding: 3% 5%;
+        font-size: 1.1em;
+    }
+    
+    /*
+     * Paragraph Mobile - Smaller font size for mobile readability
+     */
+    main p {
+        font-size: 0.95em;
+        margin-bottom: 12px;
+    }
+    
+    /*
+     * Tel Link Mobile - Full width and larger touch target
+     */
+    .tel-link {
+        width: 100%;
+        padding: 4%;
+        margin: 20px 0;
+    }
+    
+    .tel-link a {
+        font-size: 1.3em;
+    }
+    
+    /*
+     * Hours Mobile - Full width lists
+     */
+    .hours {
+        margin-left: 0;
+        padding-left: 20px;
+    }
+    
+    /*
+     * Footer Mobile - Different styling for nav vs content pages
+     */
+    .nav-page footer {
+        color: #fff;                 /* White text on nav page */
+        position: absolute;          /* Absolute positioning */
+        bottom: 0;                   /* At the bottom */
+        left: 0;                     /* Left aligned */
+        right: 0;                    /* Right aligned */
+        padding: 20px;               /* Padding */
+    }
+    
+    .nav-page footer p {
+        font-size: 18px;             /* Large font size */
+        margin: 5px 0;               /* Margin between lines */
+    }
+    
+    /*
+     * Footer Mobile - Content page footer
+     */
+    body:not(.nav-page) footer {
+        background-color: #000;
+        color: #fff;
+        position: relative;
+        margin-top: 0;
+    }
+    
+    body:not(.nav-page) footer p {
+        font-size: 0.75em;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    /* Figure frame and caption overlay for mobile viewport */
+    .frame {
+        position: relative;
+        max-width: 450px;
+        margin: 2% auto;
+    }
+
+    .pic-text {
+        position: absolute;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+        font-family: Verdana, Arial, sans-serif;
+        font-size: 1.5em;
+        font-weight: bold;
+        box-sizing: border-box; /* keep within frame width */
+    }
+    
+    /*
+     * Exercise Section Mobile - Hide common exercises on mobile
+     * Based on Figure 5-52 annotation: "hide common exercises information"
+     */
+    .exercise-section {
+        display: none;
+    }
+    
+    /*
+     * Typography Mobile Adjustments - Smaller fonts for mobile
+     */
+    h1 {
+        font-size: 2em;              /* Reduce font size for mobile */
+    }
+    
+    h2 {
+        font-size: 1.5em;            /* Reduce font size for mobile */
+    }
+    
+    h3 {
+        font-size: 1.2em;            /* Smaller font for mobile */
+    }
+    
+    h4 {
+        font-size: 1em;              /* Smaller font for mobile */
+    }
+    
+    /*
+     * Flex Container Mobile Layout - Vertical stacking for mobile
+     * Complex Layout Change:
+     * - flex-direction: column changes three-column layout to single column
+     * - This ensures content is readable on narrow mobile screens
+     */
+    .flex-container {
+        flex-direction: column;       /* Stack columns vertically on mobile */
+    }
+    
+    /*
+     * Flex Item H2 Mobile - Allow wrapping on mobile screens
+     */
+    .flex-item h2 {
+        white-space: normal;          /* Allow text to wrap on mobile */
+    }
+    
+    /* Show mobile class, hide tablet-desktop class */
+    .mobile {
+        display: block;
+    }
+    
+    .tablet-desktop {
+        display: none;
+    }
+}
+
+/* ========================================
+   ABOUT PAGE HIGHLIGHT SYSTEM
+   ======================================== */
+
+/*
+ * Highlight System Overview:
+ * This system provides conditional styling for the About page
+ * - Default state: All highlight classes have no visual effect
+ * - About page activation: Styles are activated when body has 'about-page' class
+ * - Color scheme: Based on #6c757d (medium gray) and #333 (dark gray)
+ * - Interactive elements: Hover effects with smooth transitions
+ * - Responsive design: Adjusted styling for mobile devices
+ */
+
+/* ========================================
+   HIGHLIGHT CLASS DEFINITIONS - DEFAULT STATE (NO EFFECT)
+   ======================================== */
+
+/*
+ * Primary Highlight - For important content
+ * Default state with no visual effects
+ */
+.primary-highlight {
+    color: inherit;                  /* Inherit parent color */
+    font-weight: inherit;            /* Inherit parent font weight */
+    background-color: transparent;   /* Transparent background */
+    padding: 0;                      /* No padding */
+    border-radius: 0;                /* No border radius */
+    border: none;                    /* No border */
+}
+
+/*
+ * Secondary Highlight - For secondary content
+ */
+.secondary-highlight {
+    color: inherit;
+    font-weight: inherit;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+}
+
+/*
+ * Emphasis Text - For text that needs emphasis
+ */
+.emphasis-text {
+    color: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+}
+
+/*
+ * Important Info - For important information
+ */
+.important-info {
+    color: inherit;
+    font-weight: inherit;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+}
+
+/*
+ * Item Name - For equipment/device names
+ */
+.item-name {
+    color: inherit;
+    font-weight: inherit;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    display: inline;
+    margin: 0;
+}
+
+/*
+ * Number Highlight - For numbers and time values
+ */
+.number-highlight {
+    color: inherit;
+    font-weight: inherit;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+}
+
+/*
+ * Feature Highlight - For feature descriptions
+ */
+.feature-highlight {
+    color: inherit;
+    font-weight: inherit;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+}
+
+/*
+ * Service Name - For service/class names
+ */
+.service-name {
+    color: inherit;
+    font-weight: inherit;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    display: inline;
+    margin: 0;
+}
+
+/*
+ * Professional Highlight - For professional certifications
+ */
+.professional-highlight {
+    color: inherit;
+    font-weight: inherit;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+}
+
+/*
+ * Contact Highlight - For contact information
+ */
+.contact-highlight {
+    color: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+}
+
+/*
+ * Address Highlight - For address information
+ */
+.address-highlight {
+    color: inherit;
+    font-weight: inherit;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    font-family: inherit;
+}
+
+/*
+ * Action Call-to-Action Highlight - For important action text
+ * Text-only highlight for call-to-action elements like "start your free trial!"
+ * Uses bright orange text color for high visibility without background
+ * Includes hover effects for interactivity
+ */
+.action {
+    color: #ff6b35;                     /* Bright orange text color */
+    font-weight: bold;                  /* Bold text for emphasis */
+    text-decoration: none;              /* Remove default underlines */
+    transition: all 0.3s ease;         /* Smooth transition for hover effects */
+    cursor: pointer;                    /* Indicates interactive element */
+    text-shadow: 5px 5px 8px #ccc;      /* Apply subtle text shadow */
+}
+
+/*
+ * Action Hover Effect - Interactive feedback
+ * Darkens text color and adds subtle scale effect on hover
+ */
+.action:hover {
+    color: #e55a2b;                     /* Darker orange text on hover */
+    transform: scale(1.05);             /* Subtle scale increase */
+}
+
+/* ========================================
+   ABOUT PAGE SPECIFIC STYLES - ACTIVATED STYLES
+   ======================================== */
+
+/*
+ * Item Name Highlight - Activated on About page
+ * Complex Interactive Design:
+ * - Conditional styling using body.about-page selector
+ * - Creates pill-shaped badges for equipment names
+ * - Includes hover effects with smooth transitions
+ * - Uses transform: scale(1.05) for subtle growth effect
+ * - Box-shadow creates depth and visual feedback
+ */
+body.about-page .item-name {
+    color: #333;                     /* Dark text color */
+    font-weight: 600;               /* Medium font weight */
+    background-color: #f8f9fa;       /* Light background */
+    padding: 3px 8px;                /* Internal spacing */
+    border-radius: 4px;              /* Rounded corners */
+    border: 1px solid #dee2e6;       /* Subtle border */
+    display: inline-block;           /* Allows for padding and transforms */
+    margin: 2px 0;                   /* Vertical spacing */
+    transition: all 0.3s ease;       /* Smooth transition for all properties */
+    cursor: pointer;                 /* Indicates interactive element */
+}
+
+/*
+ * Item Name Hover Effect - Interactive feedback
+ * Complex Hover Animation:
+ * - Background color changes to medium gray
+ * - Text color changes to white for contrast
+ * - Scale transform creates subtle growth effect
+ * - Box-shadow provides depth and visual feedback
+ * - All changes are smoothly animated with CSS transitions
+ */
+body.about-page .item-name:hover {
+    background-color: #6c757d;      /* Medium gray background */
+    color: #fff;                     /* White text for contrast */
+    transform: scale(1.05);          /* Subtle scale increase */
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3); /* Soft shadow */
+}
+
+/*
+ * Number Highlight - Activated on About page
+ * Static styling for numbers and time values
+ */
+body.about-page .number-highlight {
+    color: #333;                     /* Dark text color */
+    font-weight: 600;               /* Medium font weight */
+    background-color: #f8f9fa;       /* Light background */
+    padding: 3px 8px;                /* Internal spacing */
+    border-radius: 4px;              /* Rounded corners */
+    border: 1px solid #dee2e6;       /* Subtle border */
+    display: inline-block;           /* Allows for padding */
+    margin: 2px 0;                   /* Vertical spacing */
+}
+
+/*
+ * Feature Highlight - Activated on About page
+ * Interactive styling for feature descriptions
+ */
+body.about-page .feature-highlight {
+    color: #333;                     /* Dark text color */
+    font-weight: 600;                /* Medium font weight */
+    background-color: #f8f9fa;      /* Light background */
+    padding: 3px 8px;               /* Internal spacing */
+    border-radius: 4px;             /* Rounded corners */
+    border: 1px solid #dee2e6;      /* Subtle border */
+    display: inline-block;          /* Allows for padding and transforms */
+    margin: 2px 0;                   /* Vertical spacing */
+    transition: all 0.3s ease;      /* Smooth transition for all properties */
+    cursor: pointer;                /* Indicates interactive element */
+}
+
+/*
+ * Feature Highlight Hover Effect - Interactive feedback
+ * Same hover animation as item names for consistency
+ */
+body.about-page .feature-highlight:hover {
+    background-color: #6c757d;     /* Medium gray background */
+    color: #fff;                    /* White text for contrast */
+    transform: scale(1.05);         /* Subtle scale increase */
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3); /* Soft shadow */
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - MOBILE HIGHLIGHT ADJUSTMENTS
+   ======================================== */
+
+/*
+ * Mobile Highlight Adjustments - Optimized for mobile devices
+ * Complex Responsive Logic:
+ * - Targets the same 768px breakpoint as main responsive design
+ * - Reduces padding for better mobile touch targets
+ * - Decreases font size for better mobile readability
+ * - Maintains visual hierarchy while optimizing for smaller screens
+ */
+@media (max-width: 768px) {
+    /*
+     * Mobile Highlight Elements - Adjusted for mobile screens
+     * Complex Mobile Optimization:
+     * - padding: 2px 4px reduces touch target size for mobile
+     * - font-size: 0.9em improves readability on small screens
+     * - Maintains visual consistency while optimizing for mobile
+     */
+    body.about-page .item-name,
+    body.about-page .number-highlight,
+    body.about-page .feature-highlight {
+        padding: 2px 4px;           /* Reduced padding for mobile */
+        font-size: 0.9em;           /* Smaller font size for mobile */
+    }
+}
+
+/* ========================================
+   MAP STYLES - CONTACT PAGE MAP STYLING
+   ======================================== */
+
+/*
+ * Map Class - For embedded maps on contact page
+ * Responsive Design Features:
+ * - width: 95% adapts to mobile viewport
+ * - max-width: 600px prevents excessive width on large screens
+ * - height: 400px provides fixed viewing space for consistent layout
+ * - border: 2px solid #000 creates professional appearance
+ * - border-radius: 5px adds subtle rounded corners
+ * - margin: 20px auto centers the map with vertical spacing
+ */
+.map {
+    width: 95%;                      /* Width for mobile viewport */
+    height: 400px;                   /* Fixed height for better control */
+    max-width: 600px;                /* Maximum width constraint */
+    border: 2px solid #fff;          /* White border as requested */
+    border-radius: 5px;              /* Rounded corners */
+    margin: 20px auto;               /* Vertical spacing and centering */
+}
+
+#exercises {
+    clear: left;
+    border-top: 2px solid #333;           /* darker, stronger boundary */
+    border-bottom: 2px solid #333;
+    background-color: #cfcfcf;            /* deeper base gray as fallback */
+    background-image: linear-gradient(
+        to bottom,
+        #b3b3b3 0%,                      /* darker start */
+        #d0d0d0 45%,                     /* mid-tone for stronger transition */
+        #f2f2f2 75%,                     /* lighter near bottom */
+        #ffffff 100%                     /* white end */
+    );
+    padding: 1% 2%;
+    color: #000;                          /* Ensure text reads as black */
+}
+
+#exercises h1,
+#exercises h2,
+#exercises h3 {
+    color: #000;
+}
+
+#exercises dt {
+    font-weight: bold;
+    color: #000;
+}
+
+#exercises dd,
+#exercises p {
+    color: #000;
+}
+
+#exercises dd {
+    padding: 0.5% 1% 2% 0;
+}
+
+#exercises a {
+    color: #000;
+}
+
+/* ========================================
+   NUTRITION PAGE STYLES
+   ======================================== */
+.nutrition-page h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.nutrition-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: stretch; /* make all grid items equal height */
+}
+
+.nutrition-card {
+    background: #b8cec3; /* soft green similar to screenshot */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;          /* enable vertical layout */
+    flex-direction: column; /* stack content */
+}
+
+.nutrition-card h3 {
+    margin-bottom: 10px;
+}
+
+.nutrition-list {
+    list-style: disc;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.nutrition-fact {
+    margin-top: auto;       /* push fact box to bottom for alignment */
+    background: #e6efea;
+    padding: 12px 16px;
+    border-radius: 24px;
+    font-size: 0.95em;
+}
+
+/* Tablet viewport: special aside style (per Chapter 7 guide) */
+aside {
+    text-align: center;
+    font-size: 1.25em;
+    font-style: italic;
+    font-weight: bold;
+    padding: 2%;
+    background-color: rgba(204, 204, 204, 0.5);
+    box-shadow: 5px 5px 8px #000;   /* subtle card shadow */
+    text-shadow: 5px 5px 5px #b3b3b3;
+    border-radius: 0 15px;          /* round top-right & bottom-right corners */
+}
+
+/* If a fourth grid item exists, span across all three columns on tablet */
+.grid-item4 {
+    grid-column: 1 / span 3;
+}
+
+@media (max-width: 900px) {
+    .nutrition-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Desktop viewport: enlarge nutrition headings */
+@media (min-width: 1024px) {
+    /* Apply to either article h3 from textbook or current section cards */
+    article h3,
+    .nutrition-card h3 {
+        font-size: 1.75em;
+    }
+}
+
+/* ========================================
+   NUTRITION PAGE - MOBILE VIEWPORT ADJUSTMENTS (per Figure 7-51~7-56)
+   Apply padding to article elements, center h3 and images, indent lists,
+   and add a light background to the second content block. Target both
+   article and section to match existing markup.
+   ======================================== */
+.nutrition-page article,
+.nutrition-page section {
+    padding: 2%;
+}
+
+.nutrition-page article h3,
+.nutrition-page section h3 {
+    text-align: center;
+}
+
+.nutrition-page article img,
+.nutrition-page section img {
+    display: block;
+    margin: 0 auto;
+}
+
+.nutrition-page article ul,
+.nutrition-page section ul {
+    margin-left: 10%;
+}
+
+/* Removed special background for second block to keep all cards consistent */
